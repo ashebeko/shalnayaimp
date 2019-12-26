@@ -1,0 +1,807 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bubble Confetti Effect For Button Demo</title>
+
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <style>
+        .modal-content {
+            font-family: cursive;
+        }
+
+        .modal {
+            text-align: center;
+            padding: 0 !important;
+        }
+
+            .modal:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+                margin-right: -4px;
+            }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .vertical-center {
+            min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+            min-height: 100vh; /* These two lines are counted as one :-)       */
+            display: flex;
+            align-items: center;
+        }
+
+        html {
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-size: 16px;
+            font-family: 'Roboto', 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f8faff;
+        }
+
+        .button {
+            margin: 20px 0 0 0 !important;
+            font-family: cursive !important;
+        }
+        
+        .imga {
+            width: 26px;
+        }
+
+        .confetti-button {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            display: inline-block;
+            font-size: 1em;
+            padding: 1em 2em;
+            margin-top: 100px;
+            margin-bottom: 60px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #ff0081;
+            color: #fff;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+            box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+        }
+
+        .confetti-button:focus { outline: 0; }
+
+        .confetti-button:before, .confetti-button:after {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 140%;
+          height: 100%;
+          left: -20%;
+          z-index: -1000;
+          transition: all ease-in-out 0.5s;
+          background-repeat: no-repeat;
+        }
+
+        .confetti-button:before {
+          display: none;
+          top: -75%;
+          background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+          background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+        }
+
+        .confetti-button:after {
+          display: none;
+          bottom: -75%;
+          background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+          background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+        }
+
+        .confetti-button:active {
+          transform: scale(0.9);
+          background-color: #e60074;
+          box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+        }
+
+        .confetti-button.animate:before {
+          display: block;
+          animation: topBubbles ease-in-out 0.75s forwards;
+        }
+
+        .confetti-button.animate:after {
+          display: block;
+          animation: bottomBubbles ease-in-out 0.75s forwards;
+        }
+         @@keyframes
+        topBubbles {  0% {
+         background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+        }
+         50% {
+         background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+        }
+         100% {
+         background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+         background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+        }
+        @@keyframes
+        bottomBubbles {  0% {
+         background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+        }
+         50% {
+         background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+        }
+         100% {
+         background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+         background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+    }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var animateButton = function (e) {
+
+                e.preventDefault;
+                //reset animation
+                e.target.classList.remove('animate');
+
+                e.target.classList.add('animate');
+                setTimeout(function () {
+                    e.target.classList.remove('animate');
+                }, 700);
+            };
+
+            var classname = document.getElementsByClassName("confetti-button");
+
+            for (var i = 0; i < classname.length; i++) {
+                classname[i].addEventListener('click', animateButton, false);
+            }
+
+            function revolveText(options = {
+                target: undefined,
+                span: 100,
+                north: 0,
+                spiral: false
+            }) {
+                const {
+                    target,
+                    span,
+                    north,
+                    spiral,
+                    size
+                } = options;
+                const message = target.textContent;
+                const quaterWidth = target.clientWidth / 4;
+                const diameter = size || quaterWidth;
+                const messageChunks = message.split(String());
+                const { length } = messageChunks;
+                const offsetEnd = 1;
+                const l = length + offsetEnd;
+                const CIRC_MAX = 360;
+                const PERC_MAX = 100;
+                const ofDeg = span * CIRC_MAX / PERC_MAX;
+                const ofNorth = north * CIRC_MAX / PERC_MAX;
+                const segDeg = ofDeg / l;
+                const fontSize = 16;
+                let a = 0;
+                let i = 0;
+
+                target.setAttribute('style', `
+                padding-left: ${diameter / 2}px;
+                display: inline-block;
+                width: ${diameter / 2}px;
+                height: ${diameter}px;
+                transform: rotate3d(0, 0, 1, -${segDeg + ofNorth}deg);
+                border-radius: 9e9em;
+                font-size: 1rem;
+            `);
+                target.classList.add('fx-Revolve');
+                target.textContent = '';
+                while (a < ofDeg) {
+                    a += segDeg;
+                    const charWrapper = document.createElement('span');
+                    charWrapper.textContent = messageChunks[i];
+                    i++;
+                    charWrapper.classList.add('fx-RevolveCharWrap');
+                    charWrapper.setAttribute('style', `
+                    display: inline-block;
+                    transform:
+                        rotate3d(0, 0, 1, ${a}deg)
+                        ${spiral ? 'translateY(' + (i) + 'px)' : ''};
+                    ${spiral ? 'font-size:' + (fontSize - (i / 10)) + 'px' : ''};
+                    position: absolute;
+                    height: ${diameter / 2}px;
+                    transform-origin: bottom left;
+                    font-size: 1em;
+                `);
+                    target.appendChild(charWrapper);
+                }
+            }
+
+
+            revolveText({
+                target: document.querySelector('.tar3'),
+                span: 50, // percent
+                north: 25, // cc rotate in percent
+                spiral: false,
+                size: 300 // fixed size
+            });
+        });
+
+        var maxParticleCount = 150; //set max confetti count
+        var particleSpeed = 2; //set the particle animation speed
+        var startConfetti; //call to start confetti animation
+        var stopConfetti; //call to stop adding confetti
+        var toggleConfetti; //call to start or stop the confetti animation depending on whether it's already running
+        var removeConfetti; //call to stop the confetti animation and remove all confetti immediately
+
+        (function () {
+            startConfetti = startConfettiInner;
+            stopConfetti = stopConfettiInner;
+            toggleConfetti = toggleConfettiInner;
+            removeConfetti = removeConfettiInner;
+            var colors = ["DodgerBlue", "OliveDrab", "Gold", "Pink", "SlateBlue", "LightBlue", "Violet", "PaleGreen", "SteelBlue", "SandyBrown", "Chocolate", "Crimson"]
+            var streamingConfetti = false;
+            var animationTimer = null;
+            var particles = [];
+            var waveAngle = 0;
+
+            function resetParticle(particle, width, height) {
+                particle.color = colors[(Math.random() * colors.length) | 0];
+                particle.x = Math.random() * width;
+                particle.y = Math.random() * height - height;
+                particle.diameter = Math.random() * 10 + 5;
+                particle.tilt = Math.random() * 10 - 10;
+                particle.tiltAngleIncrement = Math.random() * 0.07 + 0.05;
+                particle.tiltAngle = 0;
+                return particle;
+            }
+
+            function startConfettiInner() {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                window.requestAnimFrame = (function () {
+                    return window.requestAnimationFrame ||
+                        window.webkitRequestAnimationFrame ||
+                        window.mozRequestAnimationFrame ||
+                        window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (callback) {
+                            return window.setTimeout(callback, 16.6666667);
+                        };
+                })();
+                var canvas = document.getElementById("confetti-canvas");
+                if (canvas === null) {
+                    canvas = document.createElement("canvas");
+                    canvas.setAttribute("id", "confetti-canvas");
+                    canvas.setAttribute("style", "display:block;z-index:999999;pointer-events:none");
+                    document.body.appendChild(canvas);
+                    canvas.width = width;
+                    canvas.height = height;
+                    window.addEventListener("resize", function () {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                    }, true);
+                }
+                var context = canvas.getContext("2d");
+                while (particles.length < maxParticleCount)
+                    particles.push(resetParticle({}, width, height));
+                streamingConfetti = true;
+                if (animationTimer === null) {
+                    (function runAnimation() {
+                        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                        if (particles.length === 0)
+                            animationTimer = null;
+                        else {
+                            updateParticles();
+                            drawParticles(context);
+                            animationTimer = requestAnimFrame(runAnimation);
+                        }
+                    })();
+                }
+            }
+
+            function stopConfettiInner() {
+                streamingConfetti = false;
+            }
+
+            function removeConfettiInner() {
+                stopConfetti();
+                particles = [];
+            }
+
+            function toggleConfettiInner() {
+                if (streamingConfetti)
+                    stopConfettiInner();
+                else
+                    startConfettiInner();
+            }
+
+            function drawParticles(context) {
+                var particle;
+                var x;
+                for (var i = 0; i < particles.length; i++) {
+                    particle = particles[i];
+                    context.beginPath();
+                    context.lineWidth = particle.diameter;
+                    context.strokeStyle = particle.color;
+                    x = particle.x + particle.tilt;
+                    context.moveTo(x + particle.diameter / 2, particle.y);
+                    context.lineTo(x, particle.y + particle.tilt + particle.diameter / 2);
+                    context.stroke();
+                }
+            }
+
+            function updateParticles() {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                var particle;
+                waveAngle += 0.01;
+                for (var i = 0; i < particles.length; i++) {
+                    particle = particles[i];
+                    if (!streamingConfetti && particle.y < -15)
+                        particle.y = height + 100;
+                    else {
+                        particle.tiltAngle += particle.tiltAngleIncrement;
+                        particle.x += Math.sin(waveAngle);
+                        particle.y += (Math.cos(waveAngle) + particle.diameter + particleSpeed) * 0.5;
+                        particle.tilt = Math.sin(particle.tiltAngle) * 15;
+                    }
+                    if (particle.x > width + 20 || particle.x < -20 || particle.y > height) {
+                        if (streamingConfetti && particles.length <= maxParticleCount)
+                            resetParticle(particle, width, height);
+                        else {
+                            particles.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+            }
+        })();
+        'use strict';
+
+        // If set to true, the user must press
+        // UP UP DOWN ODWN LEFT RIGHT LEFT RIGHT A B
+        // to trigger the confetti with a random color theme.
+        // Otherwise the confetti constantly falls.
+        var onlyOnKonami = false;
+
+        $(function () {
+            // Globals
+            var $window = $(window)
+                , random = Math.random
+                , cos = Math.cos
+                , sin = Math.sin
+                , PI = Math.PI
+                , PI2 = PI * 2
+                , timer = undefined
+                , frame = undefined
+                , confetti = [];
+
+            // Settings
+            var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
+                , pointer = 0;
+
+            var particles = 150
+                , spread = 40
+                , sizeMin = 3
+                , sizeMax = 12 - sizeMin
+                , eccentricity = 10
+                , deviation = 100
+                , dxThetaMin = -.1
+                , dxThetaMax = -dxThetaMin - dxThetaMin
+                , dyMin = .13
+                , dyMax = .18
+                , dThetaMin = .4
+                , dThetaMax = .7 - dThetaMin;
+
+            var colorThemes = [
+                function () {
+                    return color(200 * random() | 0, 200 * random() | 0, 200 * random() | 0);
+                }, function () {
+                    var black = 200 * random() | 0; return color(200, black, black);
+                }, function () {
+                    var black = 200 * random() | 0; return color(black, 200, black);
+                }, function () {
+                    var black = 200 * random() | 0; return color(black, black, 200);
+                }, function () {
+                    return color(200, 100, 200 * random() | 0);
+                }, function () {
+                    return color(200 * random() | 0, 200, 200);
+                }, function () {
+                    var black = 256 * random() | 0; return color(black, black, black);
+                }, function () {
+                    return colorThemes[random() < .5 ? 1 : 2]();
+                }, function () {
+                    return colorThemes[random() < .5 ? 3 : 5]();
+                }, function () {
+                    return colorThemes[random() < .5 ? 2 : 4]();
+                }
+            ];
+            function color(r, g, b) {
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            }
+
+            // Cosine interpolation
+            function interpolation(a, b, t) {
+                return (1 - cos(PI * t)) / 2 * (b - a) + a;
+            }
+
+            // Create a 1D Maximal Poisson Disc over [0, 1]
+            var radius = 1 / eccentricity, radius2 = radius + radius;
+            function createPoisson() {
+                // domain is the set of points which are still available to pick from
+                // D = union{ [d_i, d_i+1] | i is even }
+                var domain = [radius, 1 - radius], measure = 1 - radius2, spline = [0, 1];
+                while (measure) {
+                    var dart = measure * random(), i, l, interval, a, b, c, d;
+
+                    // Find where dart lies
+                    for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
+                        a = domain[i], b = domain[i + 1], interval = b - a;
+                        if (dart < measure + interval) {
+                            spline.push(dart += a - measure);
+                            break;
+                        }
+                        measure += interval;
+                    }
+                    c = dart - radius, d = dart + radius;
+
+                    // Update the domain
+                    for (i = domain.length - 1; i > 0; i -= 2) {
+                        l = i - 1, a = domain[l], b = domain[i];
+                        // c---d          c---d  Do nothing
+                        //   c-----d  c-----d    Move interior
+                        //   c--------------d    Delete interval
+                        //         c--d          Split interval
+                        //       a------b
+                        if (a >= c && a < d)
+                            if (b > d) domain[l] = d; // Move interior (Left case)
+                            else domain.splice(l, 2); // Delete interval
+                        else if (a < c && b > c)
+                            if (b <= d) domain[i] = c; // Move interior (Right case)
+                            else domain.splice(i, 0, c, d); // Split interval
+                    }
+
+                    // Re-measure the domain
+                    for (i = 0, l = domain.length, measure = 0; i < l; i += 2)
+                        measure += domain[i + 1] - domain[i];
+                }
+
+                return spline.sort();
+            }
+
+            // Create the overarching container
+            var container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '0';
+            container.style.overflow = 'visible';
+            container.style.zIndex = '9999';
+
+            // Confetto constructor
+            function Confetto(theme) {
+                this.frame = 0;
+                this.outer = document.createElement('div');
+                this.inner = document.createElement('div');
+                this.outer.appendChild(this.inner);
+
+                var outerStyle = this.outer.style, innerStyle = this.inner.style;
+                outerStyle.position = 'absolute';
+                outerStyle.width = (sizeMin + sizeMax * random()) + 'px';
+                outerStyle.height = (sizeMin + sizeMax * random()) + 'px';
+                innerStyle.width = '100%';
+                innerStyle.height = '100%';
+                innerStyle.backgroundColor = theme();
+
+                outerStyle.perspective = '50px';
+                outerStyle.transform = 'rotate(' + (360 * random()) + 'deg)';
+                this.axis = 'rotate3D(' +
+                    cos(360 * random()) + ',' +
+                    cos(360 * random()) + ',0,';
+                this.theta = 360 * random();
+                this.dTheta = dThetaMin + dThetaMax * random();
+                innerStyle.transform = this.axis + this.theta + 'deg)';
+
+                this.x = $window.width() * random();
+                this.y = -deviation;
+                this.dx = sin(dxThetaMin + dxThetaMax * random());
+                this.dy = dyMin + dyMax * random();
+                outerStyle.left = this.x + 'px';
+                outerStyle.top = this.y + 'px';
+
+                // Create the periodic spline
+                this.splineX = createPoisson();
+                this.splineY = [];
+                for (var i = 1, l = this.splineX.length - 1; i < l; ++i)
+                    this.splineY[i] = deviation * random();
+                this.splineY[0] = this.splineY[l] = deviation * random();
+
+                this.update = function (height, delta) {
+                    this.frame += delta;
+                    this.x += this.dx * delta;
+                    this.y += this.dy * delta;
+                    this.theta += this.dTheta * delta;
+
+                    // Compute spline and convert to polar
+                    var phi = this.frame % 7777 / 7777, i = 0, j = 1;
+                    while (phi >= this.splineX[j]) i = j++;
+                    var rho = interpolation(
+                        this.splineY[i],
+                        this.splineY[j],
+                        (phi - this.splineX[i]) / (this.splineX[j] - this.splineX[i])
+                    );
+                    phi *= PI2;
+
+                    outerStyle.left = this.x + rho * cos(phi) + 'px';
+                    outerStyle.top = this.y + rho * sin(phi) + 'px';
+                    innerStyle.transform = this.axis + this.theta + 'deg)';
+                    return this.y > height + deviation;
+                };
+            }
+
+            function poof() {
+                if (!frame) {
+                    // Append the container
+                    document.body.appendChild(container);
+
+                    // Add confetti
+                    var theme = colorThemes[onlyOnKonami ? colorThemes.length * random() | 0 : 0]
+                        , count = 0;
+                    (function addConfetto() {
+                        if (onlyOnKonami && ++count > particles)
+                            return timer = undefined;
+
+                        var confetto = new Confetto(theme);
+                        confetti.push(confetto);
+                        container.appendChild(confetto.outer);
+                        timer = setTimeout(addConfetto, spread * random());
+                    })(0);
+
+                    // Start the loop
+                    var prev = undefined;
+                    requestAnimationFrame(function loop(timestamp) {
+                        var delta = prev ? timestamp - prev : 0;
+                        prev = timestamp;
+                        var height = $window.height();
+
+                        for (var i = confetti.length - 1; i >= 0; --i) {
+                            if (confetti[i].update(height, delta)) {
+                                container.removeChild(confetti[i].outer);
+                                confetti.splice(i, 1);
+                            }
+                        }
+
+                        if (timer || confetti.length)
+                            return frame = requestAnimationFrame(loop);
+
+                        // Cleanup
+                        document.body.removeChild(container);
+                        frame = undefined;
+                    });
+                }
+            }
+
+            $window.keydown(function (event) {
+                pointer = konami[pointer] === event.which
+                    ? pointer + 1
+                    : +(event.which === konami[0]);
+                if (pointer === konami.length) {
+                    pointer = 0;
+                    poof();
+                }
+            });
+
+            if (!onlyOnKonami) poof();
+        });
+        for (var i = 0; i < 250; i++) {
+            create(i);
+        }
+
+        function create(i) {
+            var width = Math.random() * 8;
+            var height = width * 0.4;
+            var colourIdx = Math.ceil(Math.random() * 3);
+            var colour = "red";
+            switch (colourIdx) {
+                case 1:
+                    colour = "yellow";
+                    break;
+                case 2:
+                    colour = "blue";
+                    break;
+                default:
+                    colour = "red";
+            }
+            $('<div class="confetti-' + i + ' ' + colour + '"></div>').css({
+                "width": width + "px",
+                "height": height + "px",
+                "top": -Math.random() * 20 + "%",
+                "left": Math.random() * 100 + "%",
+                "opacity": Math.random() + 0.5,
+                "transform": "rotate(" + Math.random() * 360 + "deg)"
+            }).appendTo('.wrapper');
+
+            drop(i);
+        }
+
+        function drop(x) {
+            $('.confetti-' + x).animate({
+                top: "100%",
+                left: "+=" + Math.random() * 15 + "%"
+            }, Math.random() * 3000 + 3000, function () {
+                reset(x);
+            });
+        }
+
+        function reset(x) {
+            $('.confetti-' + x).animate({
+                "top": -Math.random() * 20 + "%",
+                "left": "-=" + Math.random() * 15 + "%"
+            }, 0, function () {
+                drop(x);
+            });
+        }
+        
+
+        for (var i = 0; i < 250; i++) {
+            create(i);
+        }
+
+        function create(i) {
+            var width = Math.random() * 8;
+            var height = width * 0.4;
+            var colourIdx = Math.ceil(Math.random() * 3);
+            var colour = "red";
+            switch (colourIdx) {
+                case 1:
+                    colour = "yellow";
+                    break;
+                case 2:
+                    colour = "blue";
+                    break;
+                default:
+                    colour = "red";
+            }
+            $('<div class="confetti-' + i + ' ' + colour + '"></div>').css({
+                "width": width + "px",
+                "height": height + "px",
+                "top": -Math.random() * 20 + "%",
+                "left": Math.random() * 100 + "%",
+                "opacity": Math.random() + 0.5,
+                "transform": "rotate(" + Math.random() * 360 + "deg)"
+            }).appendTo('.wrapper');
+
+            drop(i);
+        }
+
+        function drop(x) {
+            $('.confetti-' + x).animate({
+                top: "100%",
+                left: "+=" + Math.random() * 15 + "%"
+            }, Math.random() * 3000 + 3000, function () {
+                reset(x);
+            });
+        }
+
+        function reset(x) {
+            $('.confetti-' + x).animate({
+                "top": -Math.random() * 20 + "%",
+                "left": "-=" + Math.random() * 15 + "%"
+            }, 0, function () {
+                drop(x);
+            });
+        }
+
+        function result(res) {
+            console.log(res);
+
+            var nameSurename = $("#usr").val();
+
+            if (!nameSurename || nameSurename == "") {
+                var index = 0
+                while (index < 1000) {
+                    $("#validation").show();
+                    index++;
+                }
+                $("#validation").hide();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="vertical-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img style="padding-top: 55px; width: 57%; float: right" src="~/Content/Images/50cent.png" />
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="width: 100%; padding-bottom: 25px;" src="~/Content/Images/dirty.png" />
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <button class="button confetti-button" data-toggle="modal" data-target="#exampleModal">Click me!</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <img style="padding-top: 55px; width: 108%;" src="~/Content/Images/birthday_girl.png" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div style="background-color: #FFF0F5; color: deeppink;" class="modal-content">
+                            <div style="border: none" class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div style="border: none" class="modal-body">
+                                <p>
+                                    Cученька, ты приглашен(а) на празднование моего дня рождения, которое будет 18.01.2020 в
+                                    <a target="_blank" href="https://www.google.com/maps/place/%D0%A3%D1%81%D0%B0%D0%B4%D1%8C%D0%B1%D0%B0+%D0%A0%D0%BE%D0%B4%D0%BD%D1%8F/53.6324504,27.7071028,14.25z/data=!4m5!3m4!1s0x46d981de4aec7f91:0xee791168d56c721d!8m2!3d53.6325758!4d27.7083376?hl=ru">
+                                        Усадьбе Родня
+                                    </a> (нажми не поленись &#128540;)
+                                </p>
+
+                                <p style="padding-top: 30px;">
+                                    <div style="font-weight: bold">Тема вечеринки:</div> 
+                                    Девочки сученьки <img class="imga" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAK7UExURUdwTLJeTFYrKsGmmeHnznxTWKhIT4Ln7bZwNLRmPNORNNSXItulFi0OD1M0Nl1FSf/ZV+WrKpMrJjwlJeKoG9ejH7V4D+/AO/C9PT4dH2gUEd+lHfC7J+GzNp1RSu+9MJ9aDzMVFTUgHx4LC7QNFp01OPjcZI4XHcyOF/HBLHokJN+mFY1YB+28LfS+MfXAJ/XigDMFBx8SE9+jIG4HDtqiH8aJEP3WTWwJDt5GTL1/HvfMM7l8DqJdExQDBJAJDZ8sIqsqLY4MEqYbH3sGCOkkPKdfE/zZX7h4DsmJE5VIDbBsQrViGUwtL1MEB9cbJnYNEvLLO86UGIgIDG8UGNyeF7d4CnsgJM+XK5pqF/7tVWkFCLpfF0cKCb0VHL4hLZ4RE86bOtSXGuEgJ7cCE6RmCfnNS3gQEoJHG/Tkam9ECtUeI9eYIdgSHuoVJ/YTIp8DD9MSHP3qY7hiHM8aKPvROyQABB0ABCAABCsABDMABIIBDLIDF50CEycBBDgABC8ABIwBEJECD6wEFnkAC78DGRgAAz4ABc6QD/3FI0sABKUCFsoGGocAD8MGGm0ACUUBBJkBEv/NK6gDE//QOtQJHfK7HM8GHMN+CeQLIFcABqlrCF4AB2UAClEABucDKv/UTdWOB3QACqllBH0BDfPEI/8RK+KmE41OARMAAm84ArcCG69uBe21JNeXEbd1CPMLJNybDLoHF8uEDLx7CppZBfoNJdoCKN0KH/rIPkIYBaFgBNkIHPvHL//dZPCzBnlBAsSGEP/kdFAhBcBQF9ueGYZGAvbYL14wBZg1Cb5tC//eP5ZQA+itFv7nNu4MIjEMBWcvBf7ID9WeCYEgCq57Dqg/EMydJ+3DYf/rh//1Qcg3IdNnIP/4T7UhGeWGLKZRC/jOLuc9LcuCS+OuRJ19GZKBW54aD9g2Jvo3dUgAAADYdFJOUwAnShMJGjYEBQ0VHy3RNSf+/ot7unZXa06gvIWPOEqmzrGK4eZjQLo/2mfP/sb87izvnFZ275fm4VGt7eS59/ahctOq8HCigszC5nzGZ/Obylrs45zg8NVq5e/15t/PucWs0rv4jsbehKHYwMrjr8bvzsL49/v//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////ikNA/MAAAnhSURBVFjDpJiJUxN5Fse5Q7iRSxFFBRyVa3U8xtHRUcdratVVV2vcrTl2rt3ae6u2Ot3pTifduTp3Oic5CYEQQhICIUTCJYEBQUDEY3TK3dm5dmv/jP2FgIODWGF9VZBKp/Pp977v/b6/7iQlvTS2VHz+eX3FxsykVwtGSaPO4XDoGiqyXg30ut8xMjZS4JiRFGe/Cie7ODICMDqHTnKrNudVEip0AIxOp5Hcuj9XungoLSfn/6jyN/5IRKPR3L8FOFd2LR66vPtIReLKM+IvqR/7hyWa+4Bzi4peiZdWOazbnbBcORuXWn/AbzAY5h48oB49enRjEcSsd7kqmYmCNhfHky+ZMBjcD6joI4vl8X9ubIkdyqr99tuShCt7s3FnEuNnScw/+l0SicQ/0WR57HhyYFEjZvHtmUQ1ysx8s+HQztTKnSVug0SikQDOo4hDI9m8+P0S18yhLYmBskrOFxYcqj9wxOUCGD/l6+gDU+A/Gu9aZknjTFliIOa5Jiqik/S6NRrJXLS1brQjWhhx+N9aKohZP7wxQYnOBEITExPuEBW1dIx2dk5Gu6iJwsJlibMbdyc646WWQCgaalqkjHaOUoYuS13fjeXh2awpTqz9zF3Zb1l8AV9fjAMiJBmemOzsOLOs4G7N5gSbdrD4oMViGeyYHO2wWPoe3hkZGQ6oZq+VxTUqG/a/nmhllDsUA3U0PRkbG/ue/H5MY/iCQxkqcxYT0h1IVCLmuZ4un2VwlnJ8BeKJlv/DjGQu+KVB0li5MWuzbvjjhFdI6XWKssxGC8YKHCNfPfla+bRhxvXU2yXRaBrrj+j8BxN3j9LrId/jkTGHRKIrePJUf/O7yN1/yL944PYD1nDXrnX4UOnRH8bGdHPR6Jwm8vRmc/N3//rvzb+fO3qdchvc55nrAG08NFZgoFonJwMG/9cAFIubh7NLP/v50XPrSCjtbMGIzn10G4h3qV6Zsbm5O0Y6HWtE9np8tiwyMtx1PoeZlZWWUvclR3gzHqfX7dQVwyOFB+NXzixHCVrG52MYVp3xAkvemsF4WUb+goZl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"> 
+                                    парни ганстеры <img class="imga" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAV1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACvDRr/yD0ToQ6SWi74wTsYDgWCZh+NGBb4jUn78AC3iC9PBQvSoTRuURhMOxLstjlAdRGVzQansRmA7SBpAAAACnRSTlMAQy3/2hte8ZDDLJf7oQAAAtdJREFUWMPtmNmyoyAQhhNXMFF0glvO+7/nYAMCDSg6V1N1+iIVEb/8vdABH49f+zd7VoQWdZ7XBSXV8y6logJhW02r65SMIIpikfISpiR51K6gKq2GjeMwDN+v+BhHplVVV+WMQyNseAuT30YtKo1TKDEN2PwGm+WVklWUyRyFkXp2TRsqkSQ5bMAcQxpYEonacprma0DffRBE0WMOcTmWICNJkQ4jXrkcW5AtSZKOlswWIGbmN2/HrBtbnIoTx4wHOvXaZnNnOHaudh1Tnv18Pj/YN3CuOIxQg0GCo0g2qNnmVgeptwXJEH3AcJBAUqQEShShYxBEqYx6ZqdMgYxrDggSV0VzNvogE2wXNEbzRrFnqIwQaIgGqbgOChZAWaPkn4C2AqjLWHu9CAq03Uo20bZ9JVrbyieqgF+3QMg7WK5999KgrmdMXCKzR8XMrveX7paxXt4Ggyk9Bs3WKMzsvRLYZqwWCPoywyB7FGaum28e6GWBpP8YZI/CzG67/k9AoUcORs9B58FOBM3B9ENRzKeg1SEFCxKP+ukvQgLOrfdaiV4ilyy0RPSi9Wf/UebfCS5a3Ua6dFAXbCO6sU3+fMnxf2GK7Sdhi8VfYecC0ePR7RbxM9dNe6Nrp87PGIn+QS721JW3pmOKr9yptCX6B5k50RZinGeBasmCWGfxbZYOEnrMQqsLfrCvIcY3DmIYOj2ALG48i+20MlMAHMQgEANZ3CQ/O9obL7gHGJtRqOM75GfultLkgia3iI62tZsktkYkWYJWdrJlhyhZznWL4Syd61g8Qqad2K1s19MhoSThLGIvlGkWbrB5wh23ODsd1flZs+zzyM4IZa7GAUHrGOJTJ5zdJYnxMIezVI4m5Yvf5F6TzGKd+C6hpCrh3F20XBUDTT+w78f+pRerTtjE+72kyOOCZTT2/oBmV9+vBFH0zpuWjBQupSDZ46Zl9muf25RfU/YXVFtuKNwA0oUAAAAASUVORK5CYII=">
+                                    и одна принцесса <img class="imga" src="data:image/png;base64,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">                                    
+                                </p>
+
+                                <p>
+                                    <div style="font-weight: bold">
+                                        Мне очень важно твое решение:
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-weight: normal">1) Впиши свою имя и фамилию</label>
+                                        <input type="text" class="form-control" id="usr">
+                                        2) Реши готов ли ты вписаться на вечеринку года
+                                    </div>
+                                    <div style="color: red; float: right; display: none; font-weight: bold" id="validation">
+                                        Введи имя и фамилию
+                                    </div>
+                                </p>
+                            </div>
+                            <div style="border: none"  class="modal-footer">
+                                <button onclick="result(0);" type="button" class="btn btn-danger" >Не получается</button>
+                                <button onclick="result(1);" class="btn btn-warning">Пока не уверен, сообщу дополнительно</button>
+                                <button onclick="result(2);" class="btn btn-success">Готов</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
