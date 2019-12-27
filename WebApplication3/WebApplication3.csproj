@@ -131,10 +131,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\birthday_girl.png" />
+    <Content Include="Content\Images\dirty30.png" />
+    <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\250-2503318_sad-poo-emoji-poo.png" />
     <Content Include="Content\Images\50cent.png" />
     <Content Include="Content\Images\dirty.png" />
-    <Content Include="Content\Images\birthday_girl.png" />
     <Content Include="Content\Images\bithes.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
