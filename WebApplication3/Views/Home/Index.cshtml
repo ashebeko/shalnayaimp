@@ -10,6 +10,28 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
 
     <style>
+
+        .blink {
+          animation-name: blinker;
+          animation-iteration-count: infinite;
+          animation-timing-function: cubic-bezier(1.0,2.0,0,1.0);
+          animation-duration: 1s;
+          -webkit-animation-name: blinker;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-timing-function: cubic-bezier(1.0,2.0,0,1.0);
+          -webkit-animation-duration: 1s;
+        }
+
+        @@keyframes blinker {
+          from { opacity: 1.0; }
+          to { opacity: 0.5; }
+        }
+
+        @@-webkit-keyframes blinker {
+          from { opacity: 1.0; }
+          to { opacity: 0.5; }
+        }
+
         .modal {
             transition-delay: 0.3s;
         }
@@ -23,7 +45,7 @@
             animation: rotate-scale-up 1s linear both;
         }
 
-        
+
         @@-webkit-keyframes rotate-scale-up {
           0% {
             -webkit-transform: scale(1) rotateZ(0);
@@ -864,14 +886,32 @@
             console.log(res);
 
             var nameSurename = $("#usr").val();
+            console.log(nameSurename);
 
             if (!nameSurename || nameSurename == "") {
-                var index = 0
-                while (index < 1000) {
-                    $("#validation").show();
-                    index++;
-                }
-                $("#validation").hide();
+                $("#validation").show();
+                setTimeout(() => {
+                    $("#validation").fadeOut(1000);
+                }, 4000)
+                return;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: 'Home/sendDecision',
+                    data: JSON.stringify({
+                        UserName: nameSurename,
+                        Decision: res
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        console.log("yes");
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
             }
         }
 
@@ -969,12 +1009,16 @@
                                 </p>
                                 <p>
                                     2) Скажи громкое «OH YEAH, BABY!» безудержному веселью!
-                                    <div style="color: red; float: right; display: none; font-weight: bold" id="validation">
-                                        Введи имя и фамилию
-                                    </div>
                                 </p>
                             </div>
                             <div class="container" style="width:100%">
+                                <div style="display: none;" class="row blink" id="validation">
+                                    <div style="padding-bottom: 10px;" class="col-lg-12">
+                                        <div style="color: red; font-weight: bold; float: right">
+                                            Введи имя и фамилию
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row" style="padding-bottom: 15px;">
                                     <div class="col-lg-6">
                                         <button class="desicion_button1 desicion_button btn btn-success" onclick="result(0);" type="button">
