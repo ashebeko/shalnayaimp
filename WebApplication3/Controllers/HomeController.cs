@@ -50,9 +50,10 @@ namespace WebApplication3.Controllers
             string smtpAddress = "smtp.gmail.com";
             int portNumber = 587;
             bool enableSSL = true;
-            string emailFromAddress = "otemko@gmail.com"; //Sender Email Address  
-            string password = "5110955mother"; //Sender Password  
+            string emailFromAddress = "smtpotemkotest@gmail.com"; //Sender Email Address  
+            string password = "!123456Q"; //Sender Password  
             string emailToAddress = "otemko@gmail.com"; //Receiver Email Address  
+            string emailToAddress2 = ""; //Receiver Email Address  
             string subject = $"New Decision from {result.UserName}";
             var yesOrNo = result.Decision == Decision.No ? "No" : "Yes";
             string body = $"User {result.UserName} say {yesOrNo}";
@@ -61,6 +62,7 @@ namespace WebApplication3.Controllers
                 {
                     mail.From = new MailAddress(emailFromAddress);
                     mail.To.Add(emailToAddress);
+                    mail.To.Add(emailToAddress2);
                     mail.Subject = subject;
                     mail.Body = body;
                     mail.IsBodyHtml = true;
