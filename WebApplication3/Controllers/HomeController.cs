@@ -28,20 +28,6 @@ namespace WebApplication3.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         [AllowAnonymous]
         [HttpPost]
         [Route("sendDecision")]
@@ -53,7 +39,7 @@ namespace WebApplication3.Controllers
             string emailFromAddress = "smtpotemkotest@gmail.com"; //Sender Email Address  
             string password = "!123456Q"; //Sender Password  
             string emailToAddress = "otemko@gmail.com"; //Receiver Email Address  
-            string emailToAddress2 = ""; //Receiver Email Address  
+            string emailToAddress2 = "daria.shkraba90@gmail.com"; //Receiver Email Address  
             string subject = $"New Decision from {result.UserName}";
             var yesOrNo = result.Decision == Decision.No ? "No" : "Yes";
             string body = $"User {result.UserName} say {yesOrNo}";
